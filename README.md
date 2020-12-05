@@ -1,8 +1,8 @@
-### Project: Users Table - Create and Read from MySQL using PHP
+### Project: Users Table - Delete and Update from MySQL using PHP
 
 #### LINKS
 
-1. Placeholder for this project's page: https://kmjax.surge.sh/hw/2020-12-02_php2/
+1. Placeholder for this project's page: _*Not there yet:*_ https+//kmjax.surge.sh/hw/2020-12-03_php3/
 1. Menu of all projects: [https://kmjax.surge.sh](https://kmjax.surge.sh)
 
 #### DESCRIPTION
