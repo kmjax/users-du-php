@@ -10,7 +10,7 @@
 Enhance the a User's table web page in PHP with the following capabilities:
 
 - [x] a) Use the last assignment as a starting point
-- [ ] b) Add DELETE capability using a delete button
+- [x] b) Add DELETE capability using a delete button
 - [ ] c) Add UPDATE capability using an update button
 - [ ] d) Display additional fields to update the data
 - [ ] e) Add Update Confirm/Cancel buttons to process the update
@@ -21,7 +21,9 @@ Enhance the a User's table web page in PHP with the following capabilities:
 
 #### STATUS
 
-Project just started using the previous exercise as a starting point. Expected completion is 2020-12-05
+20% Completed. Last item to be completed was adding the user DELETE functionality to the project.
+
+See checklist above for status of each project objective. 
 
 _NOTE: Since these live assignment pages are stored on Surge.sh, static images of the webpage output is displayed instead of a live page. This is due to Surge.sh not being able to host dynamic web pages generated via PHP code._
 
