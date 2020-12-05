@@ -34,7 +34,7 @@ if (!$conn) {
     <meta name="author" content="Kelsey McClanahan" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users - Delete/Update via PHP</title>
-    <link rel="stylesheet" href="css/styles2.css" />
+    <link rel="stylesheet" href="css/styles3.css" />
 </head>
 <body>
 
@@ -125,6 +125,71 @@ if (isset($_POST['addBtn'])) {
 }
 
 
+/*************************************************
+ UPDATE STATEMENT (UPDATE)
+ ************************************************/
+
+// Check to see if the update button was pushed, if so, display the 
+// text fields for updating the user's info. Place the previous info
+// into the fields to make it easier for them to edit.
+
+if (isset($_POST['updateBtn'])) {
+  $userID =    $_POST['userID'];
+  $firstName = $_POST['firstName'];
+  $lastName =  $_POST['lastName'];
+  $email =     $_POST['email'];
+  $pword =     $_POST['pword'];
+
+  // Display textboxes and confirm/cancel buttons to update the user info
+  print "<hr>";
+  print "<form action='index.php' method='POST'>";
+  print "<input type='hidden' name='userID' value='$userID'>";
+  print "<table><tr>";
+  print "<td><span class='input-text-label'>User ID:</span></td>";
+  print "<td>$userID</td>";
+  print "</tr>";
+  print "<td><span class='input-text-label'>First Name:</span></td>";
+  print "<td><input type='text' name='firstName' size='10' class='update-text' value='$firstName'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Last Name:</span></td>";
+  print "<td><input type='text' name='lastName' size='15' class='update-text' value='$lastName'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Email:</span></td>";
+  print "<td><input type='text' name='email' size='20' class='update-text' value='$email'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Password:</span></td>";
+  print "<td><input type='text' name='pword' size='15' class='update-text' value='$pword'></td>";
+  print "</tr>";
+  print "</tr></table>";
+  print "<button type='submit' name='confirmUpdateBtn'>Confirm Update</button>";
+  print "</form>";
+
+  print "<form action='index.php' method='POST'>";
+  print "<button type='submit' name='cancelBtn'>Cancel</button>";
+  print "</form>";
+}
+
+// If the CONFIRM was pushed, update the user's data in the database!
+if (isset($_POST['confirmUpdateBtn'])) {
+  $userID =    $_POST['userID'];
+  $firstName = $_POST['firstName'];
+  $lastName =  $_POST['lastName'];
+  $email =     $_POST['email'];
+  $pword =     $_POST['pword'];
+
+  $sql = "UPDATE users SET first_name = '$firstName', last_name = '$lastName', email = '$email', password = '$pword' WHERE id = $userID";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Record updated successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+if (isset($_POST['cancelBtn'])) {
+  echo "Update cancelled; no changes made.";
+}
+
 
 
 
@@ -179,6 +244,10 @@ if (mysqli_num_rows($result) > 0) {
     print "</form></div>";
     print "<div><form action='index.php' method='POST'>";
     print "<input type='hidden' name='userID' value='$userID'>";
+    print "<input type='hidden' name='firstName' value='$firstName'>";
+    print "<input type='hidden' name='lastName' value='$lastName'>";
+    print "<input type='hidden' name='email' value='$email'>";
+    print "<input type='hidden' name='pword' value='$pword'>";
     print "<button type='submit' name='updateBtn' class='todo-btn update-btn'>UPDATE</button>";
     print "</form></div>";
     print "</div></td>";

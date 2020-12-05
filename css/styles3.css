@@ -26,6 +26,13 @@ hr {
   margin-top: 5px;
 }
 
+.update-text {
+  background-color: lightskyblue;
+  font-size: 16px;
+  font-family: monospace;
+  margin-top: 5px;
+}
+
 #add-btn {
   background-color: cornsilk;
   padding: 4px 10px;
