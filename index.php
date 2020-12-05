@@ -32,7 +32,7 @@ if (!$conn) {
     <meta name="author" content="Kelsey McClanahan" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users - Delete/Update via PHP</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles2.css" />
 </head>
 <body>
 
@@ -116,16 +116,21 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
   // Start the table and output the table header names
   print "<table id='users-table'>";
-  print "<tr><th id='th-id'>ID</th><th id='th-last-name'>Last Name</th>";
-  print "<th id='th-first-name'>First Name</th><th id='th-email'>Email</th>";
-  print "<th id='th-password'>Password</th></tr>";
+  print "<tr>";
+  print "<th id='th-id'>ID</th>";
+  print "<th id='th-last-name'>Last Name</th>";
+  print "<th id='th-first-name'>First Name</th>";
+  print "<th id='th-email'>Email</th>";
+  print "<th id='th-password'>Password</th>";
+  print "<th id='th-actions'>Actions</th>";
+  print "</tr>";
   
   // Loop through and output each returned database row in the form of an HTML row
   while($row = mysqli_fetch_assoc($result)) {
     // Grab the data from the result dataset
     $id          = $row['id'];
-    $first_name  = $row['first_name'];
-    $last_name   = $row['last_name'];
+    $firstName  = $row['first_name'];
+    $lastName   = $row['last_name'];
     $email       = $row['email'];
     $pword       = $row['password'];
 
@@ -133,10 +138,11 @@ if (mysqli_num_rows($result) > 0) {
     print "<tr>";
     // Now output each table cell
     echo "<td class='col-id'>$id</td>";
-    echo "<td class='col-last-name'>$last_name</td>";
-    echo "<td class='col-first-name'>$first_name</td>";
+    echo "<td class='col-last-name'>$lastName</td>";
+    echo "<td class='col-first-name'>$firstName</td>";
     echo "<td class='col-email'>$email</td>";
     echo "<td class='col-password'>$pword</td>";
+    echo "<td class='col-actions'>&nbsp;</td>";
     // And close out the table row
     print "</tr>";
   }

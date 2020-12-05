@@ -102,32 +102,60 @@ td {
 
 #th-password {
   padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+#th-actions {
+  padding-left: 10px;
 }
 
 .col-id {
   text-align: right;
   padding-right: 10px;
+  padding-bottom: 2px;
   border-right: 2px dotted slateblue;
+  border-bottom: 1px dashed slateblue;
 }
 
 .col-last-name {
   padding-left: 10px;
   padding-right: 10px;
+  padding-bottom: 2px;
   border-right: 2px dotted slateblue;
+  border-bottom: 1px dashed slateblue;
 }
 
 .col-first-name {
   padding-left: 10px;
   padding-right: 10px;
+  padding-bottom: 2px;
   border-right: 2px dotted slateblue;
+  border-bottom: 1px dashed slateblue;
 }
 
 .col-email {
   padding-left: 10px;
   padding-right: 10px;
+  padding-bottom: 2px;
   border-right: 2px dotted slateblue;
+  border-bottom: 1px dashed slateblue;
 }
 
 .col-password {
   padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  border-right: 2px dotted slateblue;
+  border-bottom: 1px dashed slateblue;
+}
+
+.col-actions {
+  padding-left: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px dashed slateblue;
+}
+
+.nothing {
+  color: white;
 }
