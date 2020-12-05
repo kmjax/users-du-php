@@ -26,7 +26,7 @@ hr {
   margin-top: 5px;
 }
 
-#submit-button {
+#add-btn {
   background-color: cornsilk;
   padding: 4px 10px;
   font-size: 16px;
@@ -36,15 +36,35 @@ hr {
   border-radius: 6px;
 }
 
-#submit-button:hover {
+#add-btn:hover {
   background-color: white;
   box-shadow: 0px 0px 5px black;
   font-weight: 600;
   cursor: pointer;
 }
 
-#submit-button:active {
+#add-btn:active {
   box-shadow: -2px -2px 5px black;
+}
+
+.delete-btn {
+  background-color: #880000;
+  border-radius: 5px;
+  color: cornsilk;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 2px 4px 2px 4px;
+  padding-bottom: 3px;
+}
+
+.update-btn {
+  background-color: #004488;
+  border-radius: 5px;
+  color: cornsilk;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 2px 4px 2px 4px;
+  padding-bottom: 3px;
 }
 
 #p-new-user {

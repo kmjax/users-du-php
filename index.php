@@ -19,7 +19,9 @@ if (!$conn) {
 
 ?>
 
-<!-- ======================== BEGIN HTML PAGE ======================= -->
+<!-- =============================================================
+ ========================= BEGIN HTML PAGE =======================
+ ================================================================= -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,16 +75,20 @@ if (!$conn) {
       </td>
     </tr>
   </table>
-  <button type="submit" name="addUserBtn" id="submit-button">Add User</button>
+  <button type="submit" name="addBtn" id="add-btn">Add User</button>
 </form>
 
 <?php
 
-// Check and see if a $_POST record exists. It should after the Add User button 
-// is Clicked. If a $_POST record exists, do the database insert. Otherwise, 
-// just display the list of users below.
+/*************************************************
+ INSERT STATEMENT (CREATE)
+ ************************************************/
 
-if (isset($_POST['addUserBtn'])) {
+// Check and see if a $_POST record exists. It should after the Add User button 
+// is Clicked. If a $_POST record exists, grab the fields and do the database 
+// insert. Otherwise, check for other button actions.
+
+if (isset($_POST['addBtn'])) {
   // Grab the data from the  $_POST record to use it in the INSERT statement
   $first_name = $_POST['first_name'];
   $last_name  = $_POST['last_name'];
@@ -99,6 +105,30 @@ if (isset($_POST['addUserBtn'])) {
       echo "Error: " . $sql . "<br>" . mysqli_error($conn);        
   }
 }
+
+/*************************************************
+ DELETE STATEMENT (DELETE)
+ ************************************************/
+// Check to see if the delete button was pushed, if so delete the row
+// associated with the user ID from the database
+
+ if (isset($_POST['deleteBtn'])) {
+  
+  $userID = $_POST['userID'];
+  $sql = "DELETE FROM users WHERE id = $userID";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Record deleted successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+
+
+
+
+
 
 // The following line is simply a bit of HTML for testing the new user message...
 // print "<p id='p-new-user'><span id='new-user-msg'>New user (Lastnamus, Firsty) added successfully!</span></p>";
@@ -128,21 +158,30 @@ if (mysqli_num_rows($result) > 0) {
   // Loop through and output each returned database row in the form of an HTML row
   while($row = mysqli_fetch_assoc($result)) {
     // Grab the data from the result dataset
-    $id          = $row['id'];
+    $userID     = $row['id'];
     $firstName  = $row['first_name'];
     $lastName   = $row['last_name'];
-    $email       = $row['email'];
-    $pword       = $row['password'];
+    $email      = $row['email'];
+    $pword      = $row['password'];
 
     // Start the HTML table row
     print "<tr>";
     // Now output each table cell
-    echo "<td class='col-id'>$id</td>";
-    echo "<td class='col-last-name'>$lastName</td>";
-    echo "<td class='col-first-name'>$firstName</td>";
-    echo "<td class='col-email'>$email</td>";
-    echo "<td class='col-password'>$pword</td>";
-    echo "<td class='col-actions'>&nbsp;</td>";
+    print "<td class='col-id'>$userID</td>";
+    print "<td class='col-last-name'>$lastName</td>";
+    print "<td class='col-first-name'>$firstName</td>";
+    print "<td class='col-email'>$email</td>";
+    print "<td class='col-password'>$pword</td>";
+    print "<td class='col-actions'><div style='display: flex'>";
+    print "<div><form action='index.php' method='POST'>";
+    print "<input type='hidden' name='userID' value='$userID'>";
+    print "<button type='submit' name='deleteBtn' class='todo-btn delete-btn'>DELETE</button>";
+    print "</form></div>";
+    print "<div><form action='index.php' method='POST'>";
+    print "<input type='hidden' name='userID' value='$userID'>";
+    print "<button type='submit' name='updateBtn' class='todo-btn update-btn'>UPDATE</button>";
+    print "</form></div>";
+    print "</div></td>";
     // And close out the table row
     print "</tr>";
   }
