@@ -1,0 +1,133 @@
+body {
+  background-color: darkslateblue;
+  color: cornsilk;
+  padding: 20px;
+  font-family: "Tahoma", "Helvetica", "Candara", "Arial", "sans-serif";
+}
+
+h3 {
+  font-size: 20px;
+  color: lightyellow;
+}
+
+hr {
+  margin-top: 25px;
+}
+
+.input-text-label {
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+.input-text {
+  background-color: cornsilk;
+  font-size: 16px;
+  font-family: monospace;
+  margin-top: 5px;
+}
+
+#submit-button {
+  background-color: cornsilk;
+  padding: 4px 10px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  outline: none;
+  border-radius: 6px;
+}
+
+#submit-button:hover {
+  background-color: white;
+  box-shadow: 0px 0px 5px black;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#submit-button:active {
+  box-shadow: -2px -2px 5px black;
+}
+
+#p-new-user {
+  margin: 0px;
+  padding: 0px 0px 0px 120px;
+}
+
+#new-user-msg {
+  background-color: slateblue;
+  color: yellow;
+  padding: 5px 15px 7px 15px;
+  border-radius: 25px;
+  font-size: 18px;
+}
+
+#users-table {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+th {
+  text-align: left;
+  padding-bottom: 6px;
+  font-size: 17px;
+  text-decoration: underline;
+}
+
+td {
+  font-size: 17px;
+}
+
+#th-id {
+  text-align: right;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+#th-last-name {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+#th-first-name {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+#th-email {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+#th-password {
+  padding-left: 10px;
+}
+
+.col-id {
+  text-align: right;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+.col-last-name {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+.col-first-name {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+.col-email {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 2px dotted slateblue;
+}
+
+.col-password {
+  padding-left: 10px;
+}
