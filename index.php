@@ -42,9 +42,10 @@ if (!$conn) {
 
 
 // Only display the CREATE NEW USER fields on the screen IF we are not in
-// a mode to update an existing user's data.
+// a mode to update an existing user's data. In otherwords, hide CREATE 
+// NEW USER if we are updating user data or changing a user's password.
 
-if (!(isset($_POST['updateBtn']))) {
+if (!(isset($_POST['updateBtn']) or isset($_POST['changePwordBtn']))) {
   print "<h3>Create a New User:</h3>";
   print "<form action='index.php' method='POST'>";
   print "<table>";
@@ -81,15 +82,16 @@ if (isset($_POST['addBtn'])) {
   $last_name  = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
   $email      = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
   $pword      = $_POST['password'];
+  $hashPword = password_hash($pword, PASSWORD_DEFAULT);
 
   // Create the SQL INSERT statement that will add the new user to the database table
-  $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('$first_name', '$last_name', '$email', '$pword' )";
+  $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('$first_name', '$last_name', '$email', '$hashPword' )";
 
   // Now run the SQL statement; fail if there is an error
   if (mysqli_query($conn, $sql)) {
-      echo "<p id='p-action-msg'><span id='action-msg'>New user (" . $last_name . ", " . $first_name . ") added successfully!</span></p>";
+      print "<p id='p-action-msg'><span id='action-msg'>New user ($first_name $last_name) added successfully!</span></p>";
   } else {
-      echo "Error: " . $sql . "<br>" . mysqli_error($conn);        
+      print "Error: $sql <br><br>" . mysqli_error($conn);
   }
 }
 
@@ -105,9 +107,9 @@ if (isset($_POST['addBtn'])) {
   $sql = "DELETE FROM users WHERE id = $userID";
 
     if (mysqli_query($conn, $sql)) {
-      echo "<p id='p-action-msg'><span id='action-msg'>User (ID=" . $userID . ") deleted successfully!</span></p>";
+      print "<p id='p-action-msg'><span id='action-msg'>User (ID=" . $userID . ") deleted successfully!</span></p>";
     } else {
-      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      print "Error: $sql <br><br>" . mysqli_error($conn);
     }
 }
 
@@ -125,7 +127,6 @@ if (isset($_POST['updateBtn'])) {
   $firstName = $_POST['firstName'];
   $lastName =  $_POST['lastName'];
   $email =     $_POST['email'];
-  $pword =     $_POST['pword'];
 
   // Display textboxes and confirm/cancel buttons to update the user info
   print "<h3>Edit exist user's information:</h3>";
@@ -144,9 +145,6 @@ if (isset($_POST['updateBtn'])) {
   print "<tr><td><span class='input-text-label'>Email:</span></td>";
   print "<td><input type='text' name='email' size='20' class='update-text' value='$email'></td>";
   print "</tr>";
-  print "<tr><td><span class='input-text-label'>Password:</span></td>";
-  print "<td><input type='text' name='pword' size='15' class='update-text' value='$pword'></td>";
-  print "</tr>";
   print "</tr></table>";
   print "<button type='submit' name='confirmUpdateBtn' id='confirm-update-btn'>Confirm Update</button>";
   print "</form>";
@@ -162,37 +160,84 @@ if (isset($_POST['confirmUpdateBtn'])) {
   $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
   $lastName =  filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
   $email =     filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-  $pword =     $_POST['pword'];
 
-  $sql = "UPDATE users SET first_name = '$firstName', last_name = '$lastName', email = '$email', password = '$pword' WHERE id = $userID";
+  $sql = "UPDATE users SET first_name = '$firstName', last_name = '$lastName', email = '$email' WHERE id = $userID";
 
     if (mysqli_query($conn, $sql)) {
-      echo "<p id='p-action-msg'><span id='action-msg'>User data updated successfully!</span></p>";
+      print "<p id='p-action-msg'><span id='action-msg'>User data updated successfully!</span></p>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      print "Error: $sql <br><br>" . mysqli_error($conn);
     }
 }
 
 if (isset($_POST['cancelUpdateBtn'])) {
-  echo "<p id='p-action-msg'><span id='action-msg'>Update cancelled. No user data was modified.</span></p>";
+  print "<p id='p-action-msg'><span id='action-msg'>Update cancelled. No user data was modified.</span></p>";
 }
 
 
+/*************************************************
+ UPDATE STATEMENT #2 (UPDATE) - CHANGE PASSWORD
+ ************************************************/
+
+// Check to see if the change password button was pushed, if so, display a 
+// text field for updating the user's password. 
+
+if (isset($_POST['changePwordBtn'])) {
+  $userID =    $_POST['userID'];
+  $firstName = $_POST['firstName'];
+  $lastName =  $_POST['lastName'];
+  
+  // Display textboxes and confirm/cancel buttons to update the user info
+  print "<h3>Change the user's password:</h3>";
+  print "<form action='index.php' method='POST'>";
+  print "<input type='hidden' name='userID' value='$userID'>";
+  print "<table><tr>";
+  print "<td><span class='input-text-label'>User:</span></td>";
+  print "<td>ID=$userID, $lastName, $firstName</td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Password:</span></td>";
+  print "<td><input type='text' name='pword' size='15' class='update-text' placeholder='Enter New Password'></td>";
+  print "</tr>";
+  print "</tr></table>";
+  print "<button type='submit' name='confirmChangePwordBtn' id='confirm-update-btn'>Confirm Change</button>";
+  print "</form>";
+
+  print "<form action='index.php' method='POST'>";
+  print "<button type='submit' name='cancelChangePwordBtn' id='cancel-update-btn'>Cancel Change</button>";
+  print "</form>";
+}
+
+// If the CONFIRM CHANGE was pushed, update the user's data in the database!
+if (isset($_POST['confirmChangePwordBtn'])) {
+  $userID =    $_POST['userID'];
+  $pword =     $_POST['pword'];
+  $hashPword = password_hash($pword, PASSWORD_DEFAULT);
+  
+  $sql = "UPDATE users SET password = '$hashPword' WHERE id = $userID";
+
+    if (mysqli_query($conn, $sql)) {
+      print "<p id='p-action-msg'><span id='action-msg'>User's password changed successfully!</span></p>";
+    } else {
+      print "Error: $sql <br><br>" . mysqli_error($conn);
+    }
+}
+
+if (isset($_POST['cancelChangePwordBtn'])) {
+  print "<p id='p-action-msg'><span id='action-msg'>Change cancelled. The user's password was not changed.</span></p>";
+}
 
 
+/*************************************************
+ LIST OF USERS (SELECT)
+ ************************************************/
 
-
-// The following line is simply a bit of HTML for testing the new user message...
-// print "<p id='p-new-user'><span id='new-user-msg'>New user (Lastnamus, Firsty) added successfully!</span></p>";
-
-// =====================================================
-// List of Users Section
 print "<hr><h3>Current List of Users:</h3>";
 
 // Create the SQL SELECT statement to read the users
 // Note: Data is returned sorted by last name, then first name
 $sql = "SELECT id, first_name, last_name, email, password FROM users ORDER BY last_name, first_name";
 $result = mysqli_query($conn, $sql);
+$userCount = 0;
 
 // If the query returned rows from the database, display all of the records in an HTML table
 if (mysqli_num_rows($result) > 0) {
@@ -203,7 +248,7 @@ if (mysqli_num_rows($result) > 0) {
   print "<th id='th-last-name'>Last Name</th>";
   print "<th id='th-first-name'>First Name</th>";
   print "<th id='th-email'>Email</th>";
-  print "<th id='th-password'>Password</th>";
+  print "<th id='th-password' width='50'>Password</th>";
   print "<th id='th-actions'>Actions</th>";
   print "</tr>";
   
@@ -214,7 +259,7 @@ if (mysqli_num_rows($result) > 0) {
     $firstName  = $row['first_name'];
     $lastName   = $row['last_name'];
     $email      = $row['email'];
-    $pword      = $row['password'];
+    $pword      = "&lt;&#8727;&#8727;&#8727;&#8727;&gt;";
 
     // Start the HTML table row
     print "<tr>";
@@ -224,28 +269,45 @@ if (mysqli_num_rows($result) > 0) {
     print "<td class='col-first-name'>$firstName</td>";
     print "<td class='col-email'>$email</td>";
     print "<td class='col-password'>$pword</td>";
+    
+    // Now show the actions column buttons
     print "<td class='col-actions'><div style='display: flex'>";
-    print "<div><form action='index.php' method='POST'>";
-    print "<input type='hidden' name='userID' value='$userID'>";
-    print "<button type='submit' name='deleteBtn' class='todo-btn delete-btn'>DELETE</button>";
-    print "</form></div>";
+    // UPDATE Button
     print "<div><form action='index.php' method='POST'>";
     print "<input type='hidden' name='userID' value='$userID'>";
     print "<input type='hidden' name='firstName' value='$firstName'>";
     print "<input type='hidden' name='lastName' value='$lastName'>";
     print "<input type='hidden' name='email' value='$email'>";
-    print "<input type='hidden' name='pword' value='$pword'>";
-    print "<button type='submit' name='updateBtn' class='todo-btn update-btn'>UPDATE</button>";
+    print "<button type='submit' name='updateBtn' class='update-btn'>UPDATE</button>";
+    print "</form></div>";
+
+    // Change Password Button
+    print "<div><form action='index.php' method='POST'>";
+    print "<input type='hidden' name='userID' value='$userID'>";
+    print "<input type='hidden' name='firstName' value='$firstName'>";
+    print "<input type='hidden' name='lastName' value='$lastName'>";
+    print "<button type='submit' name='changePwordBtn' class='update-btn'>CHANGE PASSWORD</button>";
+    print "</form></div>";
+
+    // DELETE Button
+        print "<div><form action='index.php' method='POST'>";
+    print "<input type='hidden' name='userID' value='$userID'>";
+    print "<button type='submit' name='deleteBtn' class='delete-btn'>DELETE</button>";
     print "</form></div>";
     print "</div></td>";
     // And close out the table row
     print "</tr>";
+
+    // Increment the user count
+    $userCount++;
   }
 
   // After looping through all of the users, close out the table
+  // and print out the user count
   print "</table>";
+  print "<br><br>User count: $userCount <br><hr><br>";
 } else {
-  echo "0 results";
+  print "0 results; the database is empty.<br>Add some users!";
 }
 
 // Close the database collection

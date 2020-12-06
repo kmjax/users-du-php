@@ -126,8 +126,8 @@ hr {
 }
 
 #action-msg {
-  background-color: slateblue;
-  color: yellow;
+  background-color: yellow;
+  color: slateblue;
   padding: 5px 15px 7px 15px;
   border-radius: 25px;
   font-size: 18px;
