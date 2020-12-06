@@ -74,6 +74,52 @@ hr {
   padding-bottom: 3px;
 }
 
+#confirm-update-btn {
+  background-color: #004488;
+  color: cornsilk;
+  padding: 4px 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  outline: none;
+  border-radius: 6px;
+}
+
+#confirm-update-btn:hover {
+  background-color: white;
+  color: #003366;
+  box-shadow: 0px 0px 5px black;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#confirm-update-btn:active {
+  box-shadow: -2px -2px 5px black;
+}
+
+#cancel-update-btn {
+  background-color: #660055;
+  color: cornsilk;
+  padding: 4px 10px;
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  outline: none;
+  border-radius: 6px;
+}
+
+#cancel-update-btn:hover {
+  background-color: cornsilk;
+  color: #440033;
+  box-shadow: 0px 0px 5px black;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#cancel-update-btn:active {
+  box-shadow: -2px -2px 5px black;
+}
+
 #p-action-msg {
   margin: 0px;
   padding: 0px;

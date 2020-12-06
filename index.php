@@ -148,11 +148,11 @@ if (isset($_POST['updateBtn'])) {
   print "<td><input type='text' name='pword' size='15' class='update-text' value='$pword'></td>";
   print "</tr>";
   print "</tr></table>";
-  print "<button type='submit' name='confirmUpdateBtn'>Confirm Update</button>";
+  print "<button type='submit' name='confirmUpdateBtn' id='confirm-update-btn'>Confirm Update</button>";
   print "</form>";
 
   print "<form action='index.php' method='POST'>";
-  print "<button type='submit' name='cancelBtn'>Cancel</button>";
+  print "<button type='submit' name='cancelUpdateBtn' id='cancel-update-btn'>Cancel Update</button>";
   print "</form>";
 }
 
@@ -173,7 +173,7 @@ if (isset($_POST['confirmUpdateBtn'])) {
     }
 }
 
-if (isset($_POST['cancelBtn'])) {
+if (isset($_POST['cancelUpdateBtn'])) {
   echo "<p id='p-action-msg'><span id='action-msg'>Update cancelled. No user data was modified.</span></p>";
 }
 
