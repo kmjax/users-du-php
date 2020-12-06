@@ -34,7 +34,7 @@ if (!$conn) {
     <meta name="author" content="Kelsey McClanahan" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users - Delete/Update via PHP</title>
-    <link rel="stylesheet" href="css/styles4.css" />
+    <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
@@ -79,7 +79,7 @@ if (isset($_POST['addBtn'])) {
   // Grab the data from the  $_POST record to use it in the INSERT statement
   $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
   $last_name  = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
-  $email      = $_POST['email'];
+  $email      = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
   $pword      = $_POST['password'];
 
   // Create the SQL INSERT statement that will add the new user to the database table
@@ -161,7 +161,7 @@ if (isset($_POST['confirmUpdateBtn'])) {
   $userID =    $_POST['userID'];
   $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
   $lastName =  filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
-  $email =     $_POST['email'];
+  $email =     filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
   $pword =     $_POST['pword'];
 
   $sql = "UPDATE users SET first_name = '$firstName', last_name = '$lastName', email = '$email', password = '$pword' WHERE id = $userID";
