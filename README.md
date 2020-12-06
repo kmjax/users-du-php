@@ -14,14 +14,14 @@ Enhance the a User's table web page in PHP with the following capabilities:
 - [x] c) Add UPDATE capability using an update button
 - [x] d) Display additional fields to update the data
 - [x] e) Add Update Confirm/Cancel buttons to process the update
-- [ ] f) Display a success (or cancelled) messages
+- [x] f) Display a success (or cancelled) messages
 - [ ] g) Sanitize strings (first/last name)
 - [ ] h) Sanitize email
 - [ ] i) Encrypt the password before storing it in the database
 
 #### STATUS
 
-50% Completed. A user's information can now be updated. Fields are displayed to make the edits along with buttons to confirm or cancel the updates. 
+65% Completed. Various messages for insert, delete, update, and update cancellation are displayed on the screen. In addition, when the form is in "update" mode, the update fields are displayed instead of the create user fields.
 
 See checklist above for status of each project objective. 
 
@@ -29,6 +29,7 @@ See checklist above for status of each project objective.
 #### PREVIOUS STATUS MESSAGES
 
 - 20% Completed. Last item to be completed was adding the user DELETE functionality to the project.
+- 50% Completed. A user's information can now be updated. Fields are displayed to make the edits along with buttons to confirm or cancel the updates. 
 
 _NOTE: Since these live assignment pages are stored on Surge.sh, static images of the webpage output is displayed instead of a live page. This is due to Surge.sh not being able to host dynamic web pages generated via PHP code._
 

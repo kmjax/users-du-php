@@ -6,7 +6,7 @@ body {
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 19px;
   color: lightyellow;
 }
 
@@ -74,12 +74,12 @@ hr {
   padding-bottom: 3px;
 }
 
-#p-new-user {
+#p-action-msg {
   margin: 0px;
-  padding: 0px 0px 0px 120px;
+  padding: 0px;
 }
 
-#new-user-msg {
+#action-msg {
   background-color: slateblue;
   color: yellow;
   padding: 5px 15px 7px 15px;
@@ -135,6 +135,7 @@ td {
 
 #th-actions {
   padding-left: 10px;
+  text-align: center;
 }
 
 .col-id {

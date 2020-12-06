@@ -34,51 +34,38 @@ if (!$conn) {
     <meta name="author" content="Kelsey McClanahan" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users - Delete/Update via PHP</title>
-    <link rel="stylesheet" href="css/styles3.css" />
+    <link rel="stylesheet" href="css/styles4.css" />
 </head>
 <body>
 
-<h3>Create a New User:</h3>
-
-<form action="index.php" method="POST">
-  <table>
-    <tr>
-      <td>
-        <span class="input-text-label">First Name:</span>
-      </td>
-      <td>
-        <input type="text" name="first_name" size="10" class="input-text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="input-text-label">Last Name:</span>
-      </td>
-      <td>
-        <input type="text" name="last_name" size="15" class="input-text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="input-text-label">Email:</span>
-      </td>
-      <td>
-        <input type="text" name="email" size="20" class="input-text">
-      </td>
-     </tr>
-    <tr>
-      <td>
-        <span class="input-text-label">Password:</span>
-      </td>
-      <td>
-        <input type="text" name="password" size="15" class="input-text">
-      </td>
-    </tr>
-  </table>
-  <button type="submit" name="addBtn" id="add-btn">Add User</button>
-</form>
-
 <?php
+
+
+// Only display the CREATE NEW USER fields on the screen IF we are not in
+// a mode to update an existing user's data.
+
+if (!(isset($_POST['updateBtn']))) {
+  print "<h3>Create a New User:</h3>";
+  print "<form action='index.php' method='POST'>";
+  print "<table>";
+  print "<tr><td><span class='input-text-label'>First Name:</span></td>";
+  print "<td><input type='text' name='first_name' size='10' class='input-text'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Last Name:</span></td>";
+  print "<td><input type='text' name='last_name' size='15' class='input-text'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Email:</span></td>";
+  print "<td><input type='text' name='email' size='20' class='input-text'></td>";
+  print "</tr>";
+  print "<tr><td><span class='input-text-label'>Password:</span></td>";
+  print "<td><input type='text' name='password' size='15' class='input-text'></td>";
+  print "</tr>";
+  print "</table>";
+  print "<button type='submit' name='addBtn' id='add-btn'>Add User</button>";
+  print "</form>";
+}
+
+
 
 /*************************************************
  INSERT STATEMENT (CREATE)
@@ -100,7 +87,7 @@ if (isset($_POST['addBtn'])) {
 
   // Now run the SQL statement; fail if there is an error
   if (mysqli_query($conn, $sql)) {
-      echo "<p id='p-new-user'><span id='new-user-msg'>New user (" . $last_name . ", " . $first_name . ") added successfully!</span></p>";
+      echo "<p id='p-action-msg'><span id='action-msg'>New user (" . $last_name . ", " . $first_name . ") added successfully!</span></p>";
   } else {
       echo "Error: " . $sql . "<br>" . mysqli_error($conn);        
   }
@@ -118,9 +105,9 @@ if (isset($_POST['addBtn'])) {
   $sql = "DELETE FROM users WHERE id = $userID";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Record deleted successfully!";
+      echo "<p id='p-action-msg'><span id='action-msg'>User (ID=" . $userID . ") deleted successfully!</span></p>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
 
@@ -141,7 +128,7 @@ if (isset($_POST['updateBtn'])) {
   $pword =     $_POST['pword'];
 
   // Display textboxes and confirm/cancel buttons to update the user info
-  print "<hr>";
+  print "<h3>Edit exist user's information:</h3>";
   print "<form action='index.php' method='POST'>";
   print "<input type='hidden' name='userID' value='$userID'>";
   print "<table><tr>";
@@ -180,14 +167,14 @@ if (isset($_POST['confirmUpdateBtn'])) {
   $sql = "UPDATE users SET first_name = '$firstName', last_name = '$lastName', email = '$email', password = '$pword' WHERE id = $userID";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Record updated successfully!";
+      echo "<p id='p-action-msg'><span id='action-msg'>User data updated successfully!</span></p>";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
 
 if (isset($_POST['cancelBtn'])) {
-  echo "Update cancelled; no changes made.";
+  echo "<p id='p-action-msg'><span id='action-msg'>Update cancelled. No user data was modified.</span></p>";
 }
 
 
