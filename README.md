@@ -15,19 +15,20 @@ Enhance the a User's table web page in PHP with the following capabilities:
 - [x] d) Display additional fields to update the data
 - [x] e) Add Update Confirm/Cancel buttons to process the update
 - [x] f) Display a success (or cancelled) messages
-- [ ] g) Sanitize strings (first/last name)
+- [x] g) Sanitize strings (first/last name)
 - [ ] h) Sanitize email
 - [ ] i) Encrypt the password before storing it in the database
 
 #### STATUS
 
-67% Completed. Modified CSS of Confirm Update/Cancel Update buttons
+75% Completed. First and Last name fields are now sanitized prior to being stored in the database.
 
 See checklist above for status of each project objective. 
 
 
 #### PREVIOUS STATUS MESSAGES
 
+- 67% Completed. Modified CSS of Confirm Update/Cancel Update buttons
 - 65% Completed. Various messages for insert, delete, update, and update cancellation are displayed on the screen. In addition, when the form is in "update" mode, the update fields are displayed instead of the create user fields.
 - 50% Completed. A user's information can now be updated. Fields are displayed to make the edits along with buttons to confirm or cancel the updates. 
 - 20% Completed. Last item to be completed was adding the user DELETE functionality to the project.

@@ -77,8 +77,8 @@ if (!(isset($_POST['updateBtn']))) {
 
 if (isset($_POST['addBtn'])) {
   // Grab the data from the  $_POST record to use it in the INSERT statement
-  $first_name = $_POST['first_name'];
-  $last_name  = $_POST['last_name'];
+  $first_name = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
+  $last_name  = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
   $email      = $_POST['email'];
   $pword      = $_POST['password'];
 
@@ -159,8 +159,8 @@ if (isset($_POST['updateBtn'])) {
 // If the CONFIRM was pushed, update the user's data in the database!
 if (isset($_POST['confirmUpdateBtn'])) {
   $userID =    $_POST['userID'];
-  $firstName = $_POST['firstName'];
-  $lastName =  $_POST['lastName'];
+  $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
+  $lastName =  filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
   $email =     $_POST['email'];
   $pword =     $_POST['pword'];
 
