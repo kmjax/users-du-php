@@ -2,7 +2,7 @@
 
 #### LINKS
 
-1. This project's page: [https://kmjax.surge.sh/hw/2020-12-03_php3/](https://kmjax.surge.sh/hw/2020-12-03_php3/)
+1. This project's LIVE page: [https://www.kmcode.com/kmjax/users_du/](https://www.kmcode.com/kmjax/users_du)
 1. Menu of all projects: [https://kmjax.surge.sh](https://kmjax.surge.sh)
 
 #### DESCRIPTION
@@ -23,8 +23,7 @@ Enhance the a User's table web page in PHP with the following capabilities:
 
 **COMPLETED on 2020-12-06** Project is now completed. These are the last items added: a) password is now stored encrypted b) password is no longer displayed on the list of users now that it is encrypted c) changing a password was implemented separately from updating the other user table fields (first/last name and email).
 
-See checklist above for status of each project objective. 
-
+See checklist above for status of each project objective.
 
 #### PREVIOUS STATUS MESSAGES
 
@@ -32,7 +31,7 @@ See checklist above for status of each project objective.
 - 75% Completed. First and Last name fields are now sanitized prior to being stored in the database.
 - 67% Completed. Modified CSS of Confirm Update/Cancel Update buttons
 - 65% Completed. Various messages for insert, delete, update, and update cancellation are displayed on the screen. In addition, when the form is in "update" mode, the update fields are displayed instead of the create user fields.
-- 50% Completed. A user's information can now be updated. Fields are displayed to make the edits along with buttons to confirm or cancel the updates. 
+- 50% Completed. A user's information can now be updated. Fields are displayed to make the edits along with buttons to confirm or cancel the updates.
 - 20% Completed. Last item to be completed was adding the user DELETE functionality to the project.
 
 _NOTE: Since these live assignment pages are stored on Surge.sh, static images of the webpage output is displayed instead of a live page. This is due to Surge.sh not being able to host dynamic web pages generated via PHP code._
